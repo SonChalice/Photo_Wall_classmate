@@ -83,19 +83,22 @@ header p {
 }
 
 .photo-grid {
-  column-count: 4; /* 桌面端 4 列 */
-  column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
 /* 响应式列数调整 */
-@media (max-width: 1200px) { .photo-grid { column-count: 3; } }
-@media (max-width: 768px)  { .photo-grid { column-count: 2; column-gap: 12px; } }
-@media (max-width: 480px)  { .photo-grid { column-count: 1; } }
+@media (max-width: 1200px) { .photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 768px)  { .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+@media (max-width: 480px)  { .photo-grid { grid-template-columns: 1fr; } }
 
 /* --- 图片卡片样式 --- */
 .photo-card {
+  display: flex;
+  flex-direction: column;
   break-inside: avoid;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   background: var(--card-bg);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -103,32 +106,28 @@ header p {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   position: relative;
-}
-
-.photo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.photo-card.hide {
-  display: none;
+  height: 100%;
 }
 
 .photo-wrapper {
   width: 100%;
+  height: 280px;
   background-color: #eaeff5; /* 懒加载占位背景色 */
   position: relative;
+  overflow: hidden;
 }
 
 .photo-card img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
   transition: opacity 0.3s ease;
 }
 
 .photo-info {
   padding: 12px 16px;
+  min-height: 72px;
 }
 
 .photo-title {
@@ -240,6 +239,43 @@ header p {
   .lightbox-btn { font-size: 25px; width: 45px; height: 45px; }
   .lightbox-prev { left: 10px; }
   .lightbox-next { right: 10px; }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 32px 16px 20px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  header p {
+    font-size: 0.8rem;
+  }
+
+  .filter-container {
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .photo-wrapper {
+    height: 170px;
+  }
+
+  .lightbox-caption h3 {
+    font-size: 1rem;
+  }
+
+  .lightbox-caption p {
+    font-size: 0.8rem;
+  }
 }
 
 /* --- “加载更多”提示 --- */

@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.addEventListener('scroll', () => {
-    const scrollBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 80;
-    if (scrollBottom) {
+    const distanceToBottom = document.body.offsetHeight - (window.innerHeight + window.scrollY);
+    if (distanceToBottom <= 1000) {
       loadMore();
     }
   });
