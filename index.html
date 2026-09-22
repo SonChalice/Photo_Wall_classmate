@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青春不散场 - 大学时光与聚会相册</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 页面头部 -->
+  <header>
+    <h1>🎓 CSU电子商务2013级回忆录</h1>
+    <p>苟富贵，勿相忘｜记载我们的毕业与历次聚会时光</p>
+  </header>
+
+  <!-- 分类筛选导航栏 -->
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all">全部照片</button>
+    <button class="filter-btn" data-filter="graduation">🎓 毕业典礼</button>
+    <!-- <button class="filter-btn" data-filter="trip">✈️ 毕业旅行</button>
+    <button class="filter-btn" data-filter="reunion">🍻 周年聚会</button> -->
+  </div>
+
+  <!-- 照片墙容器 -->
+  <div class="container">
+    <div class="photo-grid" id="photoGrid"></div>
+    <div class="load-more-tip" id="loadMoreTip">下拉加载更多</div>
+  </div>
+
+  <!-- 全屏灯箱查看器 -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <div class="lightbox-btn lightbox-prev" id="lightboxPrev">&#10094;</div>
+    <div class="lightbox-btn lightbox-next" id="lightboxNext">&#10095;</div>
+    <div class="lightbox-img-container">
+      <img id="lightboxImg" src="" alt="大图查看">
+    </div>
+    <div class="lightbox-caption">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxMeta"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+/* --- 全局样式与变量 --- */
+:root {
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-main: #2c3e50;
+  --text-sub: #7f8c8d;
+  --primary-color: #4a90e2;
+  --border-radius: 12px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+
+/* --- 页头部分 --- */
+header {
+  text-align: center;
+  padding: 50px 20px 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--text-sub);
+  font-size: 1rem;
+}
+
+/* --- 分类筛选按钮 --- */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.filter-btn {
+  background: var(--card-bg);
+  border: 1px solid #e2e8f0;
+  color: var(--text-main);
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* --- 瀑布流主区域 --- */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.photo-grid {
+  column-count: 4; /* 桌面端 4 列 */
+  column-gap: 20px;
+}
+
+/* 响应式列数调整 */
+@media (max-width: 1200px) { .photo-grid { column-count: 3; } }
+@media (max-width: 768px)  { .photo-grid { column-count: 2; column-gap: 12px; } }
+@media (max-width: 480px)  { .photo-grid { column-count: 1; } }
+
+/* --- 图片卡片样式 --- */
+.photo-card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.photo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.photo-card.hide {
+  display: none;
+}
+
+.photo-wrapper {
+  width: 100%;
+  background-color: #eaeff5; /* 懒加载占位背景色 */
+  position: relative;
+}
+
+.photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.photo-info {
+  padding: 12px 16px;
+}
+
+.photo-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.photo-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--text-sub);
+}
+
+/* --- 全屏大图灯箱 (Lightbox) --- */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-img-container {
+  max-width: 90%;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-img-container img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+}
+
+.lightbox-caption {
+  color: #ffffff;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.lightbox-caption h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.lightbox-caption p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 4px;
+}
+
+/* 灯箱控制按钮 */
+.lightbox-close {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  color: #fff;
+  font-size: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  padding: 15px;
+  user-select: none;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+@media (max-width: 768px) {
+  .lightbox-btn { font-size: 25px; width: 45px; height: 45px; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+}
+
+/* --- “加载更多”提示 --- */
+.load-more-tip {
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  margin-top: 12px;
+  padding: 10px 0 30px;
+  user-select: none;
+}
+
+.load-more-tip.end {
+  color: #94a3b8;
+}
